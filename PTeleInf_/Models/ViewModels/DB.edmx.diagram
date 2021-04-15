@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0db34821486147f99e24c5969d5ffd73" Name="Diagram1">
+        <EntityTypeShape EntityType="laboratorioDBModel.CITA" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.CITA_TIPOEXAMEN" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.NOMBRE_EXAMEN" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.RESULTADO_EXAMEN" Width="1.5" PointX="12.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.RESULTADO_PACIENTE" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.ROL" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.TIPOEXAMEN" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="laboratorioDBModel.USUARIO" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="laboratorioDBModel.FK_CITA_TIPOEXAMEN_CITA" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_CITA_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_RESULTADO_PACIENTE_CITA" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_CITA_TIPOEXAMEN" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_NOMBRE_EXAMEN_TIPOEXAMEN" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_RESULTADO_EXAMEN_ResultadoPaciente" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_RESULTADO_EXAMEN_TIPOEXAMEN" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_RESULTADO_PACIENTE_RESULTADO_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="laboratorioDBModel.FK_USUARIO_ROL" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,302 @@
+﻿@model PTeleInf_.Models.ViewModels.CrearPacienteViewModel
+@{
+    ViewBag.Title = "CrearCita";
+}
+<!doctype html>
+<html class="" lang="">
+
+<head>
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+</head>
+@using (Html.BeginForm("CrearCita", "laboratorioDB", FormMethod.Post))
+{
+    <body>
+
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Tablero</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a id="antiSubray" href="#">Tablero</a></li>
+                                    <li><a id="antiSubray" href="#">Menú</a></li>
+                                    <li class="active">Crear Citas a Paciente</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="content">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Crear Citas</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <h3>Datos del Paciente</h3><br>
+                            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+
+                                        <label for="text-input" class=" form-control-label">Nombre:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.NamePacient, "", new { @class = "form-control", @placeholder = "Escriba el nombre..." })
+                                        @*@Html.ValidationMessageFor(d => d.NamePacient, null, new { @class = "" })*@
+
+                                        <small class="form-text text-muted">Ejemplo: María</small>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Apellido:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.ApellidoPacient, "", new { @class = "form-control", @placeholder = "Escriba el apellido..." })
+
+                                        <small class="form-text text-muted">Ejemplo: Delgado</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Cédula:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.CedulaPacient, "", new { @class = "form-control", @placeholder = "Escriba su cedula..." })
+                                        <small class="form-text text-muted">Ejemplo: 00-000-000</small>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Fecha de Nacimiento:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.FechaNac, "", new { @class = "form-control", @type = "date" })
+
+                                        <small class="form-text text-muted">Escoja su fecha de nacimiento...</small>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Programar fecha para cita:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.FechaPrCita, "", new { @class = "form-control", @type = "date" })
+
+
+                                        <small class="form-text text-muted">Programe la fecha para la cita...</small>
+                                    </div>
+                                </div>
+
+
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Dirección:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.DireccionPacient, "", new { @class = "form-control", @placeholder = "Escriba su dirección..." })
+
+
+                                        <small class="form-text text-muted">Ejemplo: Las Tablas...</small>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="text-input" class=" form-control-label">Teléfono:</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+
+                                        @Html.TextBoxFor(d => d.TelefonoPacient, "", new { @class = "form-control", @placeholder = "Escriba su número de teléfono..." })
+
+
+                                        <small class="form-text text-muted">Ejemplo: 0000-000</small>
+                                    </div>
+                                </div>
+
+                                @*<button id="btnSaved" type="submit" class="btn btn-sm">
+                                        <i class="fa fa-dot-circle-o"></i> Crear Cita
+                                    </button>*@
+                                <input value="Guardar" class="btn btn-sm" type="submit">
+
+
+                                <br>
+                                <h3>Exámenes a Realizar el Paciente</h3><br>
+
+                                <!--Lista de Tipo con sus Nombre de Examen
+                                HEMATOLOGIA-->
+
+                                <div class="form-check form-switch">
+                                    @*<input class="form-check-input" type="checkbox" value=1 id="hematologiaCheck">*@
+                                    
+                                    <H4><label class="form-check-label" for="text-input">HEMATOLOGIA</label></H4>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <br>
+
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Hemoglobina</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Hematocritos</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Globulos</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Plaquetas</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Leucocitos</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Linfocitos</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Monocitos</label>
+                                </div>
+
+                                <!--Lista de Tipo con sus Nombre de Examen
+                                QUIMICA CLINICA-->
+                                <br><br>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <h4><label class="form-check-label" for="flexSwitchCheckDefault">QUIMICA CLINICA</label></h4>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <br>
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Glicemia</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Acido Urico</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Colesterol</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Trigliceridos</label>
+                                </div>
+
+                                <!--Lista de Tipo con sus Nombre de Examen
+                                ORINA-->
+                                <br><br>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <h4><label class="form-check-label" for="flexSwitchCheckDefault">ORINA</label></h4>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <br>
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">Color</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Aspecto</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label" for="inlineCheckbox1">PH</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Glucosa</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Sangre Oculta</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Nitrito</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Mucosa</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label" for="inlineCheckbox2">Bacteria</label>
+                                </div>
+                            </form>
+                        </div>
+                        <br>
+                        <div class="card-footer">
+                            <button type="submit" id="btn" class="btn btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Crear Cita
+                            </button>
+                            <button id="btnCancel" type="reset" class="btn btn-sm">
+                                <i class="fa fa-ban"></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- /# column -->
+        </div><!-- .content -->
+        <!-- Right Panel -->
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+
+
+
+    </body>
+}
+</html>

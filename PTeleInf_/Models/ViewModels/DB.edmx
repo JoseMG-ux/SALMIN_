@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="laboratorioDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CITA">
+          <Key>
+            <PropertyRef Name="ID_CITA" />
+          </Key>
+          <Property Name="ID_CITA" Type="int" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="int" />
+          <Property Name="NOMBREPACIENTE" Type="nvarchar" MaxLength="50" />
+          <Property Name="APELLIDO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CEDULA" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIRECCION" Type="nvarchar" MaxLength="50" />
+          <Property Name="TELEFONO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHANACIMIENTO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHAPROGRAMADA" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CITA_TIPOEXAMEN">
+          <Key>
+            <PropertyRef Name="ID_CITA_EXAMEN" />
+          </Key>
+          <Property Name="ID_CITA_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="ID_TIPOEXAMEN" Type="int" />
+          <Property Name="ID_NOMBRE_EXAMEN" Type="int" />
+          <Property Name="ID_CITA" Type="int" />
+        </EntityType>
+        <EntityType Name="NOMBRE_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+          </Key>
+          <Property Name="ID_NOMBRE_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="ID_TIPOEXAMEN" Type="int" />
+          <Property Name="NOMBRE_EXAMEN" Type="nvarchar" MaxLength="50" />
+          <Property Name="RANGO_INFERIOR" Type="nvarchar" MaxLength="50" />
+          <Property Name="RANGO_SUPERIOR" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RESULTADO_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID_RESULTADOEXAMEN" />
+          </Key>
+          <Property Name="ID_RESULTADOEXAMEN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_NOMBRE_EXAMEN" Type="int" />
+          <Property Name="RESULTADO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_TIPOEXAMEN" Type="int" />
+          <Property Name="ID_RESULTADOPACIENTE" Type="int" />
+        </EntityType>
+        <EntityType Name="RESULTADO_PACIENTE">
+          <Key>
+            <PropertyRef Name="ID_RESULTADOPACIENTE" />
+          </Key>
+          <Property Name="ID_RESULTADOPACIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBREPACIENTE" Type="nvarchar" MaxLength="50" />
+          <Property Name="APELLIDO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CEDULA" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIRECCION" Type="nvarchar" MaxLength="50" />
+          <Property Name="TELEFONO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHANACIMIENTO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHAPROGRAMADA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHARESULTADO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_CITA" Type="int" />
+          <Property Name="ID_USUARIO" Type="int" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_ROL" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TIPOEXAMEN">
+          <Key>
+            <PropertyRef Name="ID_TIPOEXAMEN" />
+          </Key>
+          <Property Name="ID_TIPOEXAMEN" Type="int" Nullable="false" />
+          <Property Name="NOMBRE_TIPOEXAMEN" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBREUSUARIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="APELLIDO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CEDULA" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIRECCION" Type="nvarchar" MaxLength="50" />
+          <Property Name="TELEFONO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FECHANAMIENTO" Type="date" />
+          <Property Name="ID_ROL" Type="int" />
+        </EntityType>
+        <Association Name="FK_CITA_TIPOEXAMEN">
+          <End Role="TIPOEXAMEN" Type="Self.TIPOEXAMEN" Multiplicity="0..1" />
+          <End Role="CITA_TIPOEXAMEN" Type="Self.CITA_TIPOEXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Principal>
+            <Dependent Role="CITA_TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITA_TIPOEXAMEN_CITA">
+          <End Role="CITA" Type="Self.CITA" Multiplicity="0..1" />
+          <End Role="CITA_TIPOEXAMEN" Type="Self.CITA_TIPOEXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITA">
+              <PropertyRef Name="ID_CITA" />
+            </Principal>
+            <Dependent Role="CITA_TIPOEXAMEN">
+              <PropertyRef Name="ID_CITA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN">
+          <End Role="NOMBRE_EXAMEN" Type="Self.NOMBRE_EXAMEN" Multiplicity="0..1" />
+          <End Role="CITA_TIPOEXAMEN" Type="Self.CITA_TIPOEXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOMBRE_EXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Principal>
+            <Dependent Role="CITA_TIPOEXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOMBRE_EXAMEN_TIPOEXAMEN">
+          <End Role="TIPOEXAMEN" Type="Self.TIPOEXAMEN" Multiplicity="0..1" />
+          <End Role="NOMBRE_EXAMEN" Type="Self.NOMBRE_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Principal>
+            <Dependent Role="NOMBRE_EXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN">
+          <End Role="NOMBRE_EXAMEN" Type="Self.NOMBRE_EXAMEN" Multiplicity="0..1" />
+          <End Role="RESULTADO_EXAMEN" Type="Self.RESULTADO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOMBRE_EXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Principal>
+            <Dependent Role="RESULTADO_EXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_EXAMEN_ResultadoPaciente">
+          <End Role="RESULTADO_PACIENTE" Type="Self.RESULTADO_PACIENTE" Multiplicity="0..1" />
+          <End Role="RESULTADO_EXAMEN" Type="Self.RESULTADO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESULTADO_PACIENTE">
+              <PropertyRef Name="ID_RESULTADOPACIENTE" />
+            </Principal>
+            <Dependent Role="RESULTADO_EXAMEN">
+              <PropertyRef Name="ID_RESULTADOPACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_EXAMEN_TIPOEXAMEN">
+          <End Role="TIPOEXAMEN" Type="Self.TIPOEXAMEN" Multiplicity="0..1" />
+          <End Role="RESULTADO_EXAMEN" Type="Self.RESULTADO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Principal>
+            <Dependent Role="RESULTADO_EXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_PACIENTE_CITA">
+          <End Role="CITA" Type="Self.CITA" Multiplicity="0..1" />
+          <End Role="RESULTADO_PACIENTE" Type="Self.RESULTADO_PACIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITA">
+              <PropertyRef Name="ID_CITA" />
+            </Principal>
+            <Dependent Role="RESULTADO_PACIENTE">
+              <PropertyRef Name="ID_CITA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_PACIENTE_RESULTADO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="RESULTADO_PACIENTE" Type="Self.RESULTADO_PACIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="RESULTADO_PACIENTE">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="laboratorioDBModelStoreContainer">
+          <EntitySet Name="CITA" EntityType="Self.CITA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITA_TIPOEXAMEN" EntityType="Self.CITA_TIPOEXAMEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NOMBRE_EXAMEN" EntityType="Self.NOMBRE_EXAMEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESULTADO_EXAMEN" EntityType="Self.RESULTADO_EXAMEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESULTADO_PACIENTE" EntityType="Self.RESULTADO_PACIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOEXAMEN" EntityType="Self.TIPOEXAMEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CITA_TIPOEXAMEN" Association="Self.FK_CITA_TIPOEXAMEN">
+            <End Role="TIPOEXAMEN" EntitySet="TIPOEXAMEN" />
+            <End Role="CITA_TIPOEXAMEN" EntitySet="CITA_TIPOEXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITA_TIPOEXAMEN_CITA" Association="Self.FK_CITA_TIPOEXAMEN_CITA">
+            <End Role="CITA" EntitySet="CITA" />
+            <End Role="CITA_TIPOEXAMEN" EntitySet="CITA_TIPOEXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN" Association="Self.FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN">
+            <End Role="NOMBRE_EXAMEN" EntitySet="NOMBRE_EXAMEN" />
+            <End Role="CITA_TIPOEXAMEN" EntitySet="CITA_TIPOEXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITA_USUARIO" Association="Self.FK_CITA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOMBRE_EXAMEN_TIPOEXAMEN" Association="Self.FK_NOMBRE_EXAMEN_TIPOEXAMEN">
+            <End Role="TIPOEXAMEN" EntitySet="TIPOEXAMEN" />
+            <End Role="NOMBRE_EXAMEN" EntitySet="NOMBRE_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN" Association="Self.FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN">
+            <End Role="NOMBRE_EXAMEN" EntitySet="NOMBRE_EXAMEN" />
+            <End Role="RESULTADO_EXAMEN" EntitySet="RESULTADO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_EXAMEN_ResultadoPaciente" Association="Self.FK_RESULTADO_EXAMEN_ResultadoPaciente">
+            <End Role="RESULTADO_PACIENTE" EntitySet="RESULTADO_PACIENTE" />
+            <End Role="RESULTADO_EXAMEN" EntitySet="RESULTADO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_EXAMEN_TIPOEXAMEN" Association="Self.FK_RESULTADO_EXAMEN_TIPOEXAMEN">
+            <End Role="TIPOEXAMEN" EntitySet="TIPOEXAMEN" />
+            <End Role="RESULTADO_EXAMEN" EntitySet="RESULTADO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_PACIENTE_CITA" Association="Self.FK_RESULTADO_PACIENTE_CITA">
+            <End Role="CITA" EntitySet="CITA" />
+            <End Role="RESULTADO_PACIENTE" EntitySet="RESULTADO_PACIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_PACIENTE_RESULTADO_USUARIO" Association="Self.FK_RESULTADO_PACIENTE_RESULTADO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="RESULTADO_PACIENTE" EntitySet="RESULTADO_PACIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="laboratorioDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CITA">
+          <Key>
+            <PropertyRef Name="ID_CITA" />
+          </Key>
+          <Property Name="ID_CITA" Type="Int32" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="Int32" />
+          <Property Name="NOMBREPACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CEDULA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHANACIMIENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHAPROGRAMADA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CITA_TIPOEXAMEN" Relationship="Self.FK_CITA_TIPOEXAMEN_CITA" FromRole="CITA" ToRole="CITA_TIPOEXAMEN" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_CITA_USUARIO" FromRole="CITA" ToRole="USUARIO" />
+          <NavigationProperty Name="RESULTADO_PACIENTE" Relationship="Self.FK_RESULTADO_PACIENTE_CITA" FromRole="CITA" ToRole="RESULTADO_PACIENTE" />
+        </EntityType>
+        <EntityType Name="CITA_TIPOEXAMEN">
+          <Key>
+            <PropertyRef Name="ID_CITA_EXAMEN" />
+          </Key>
+          <Property Name="ID_CITA_EXAMEN" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPOEXAMEN" Type="Int32" />
+          <Property Name="ID_NOMBRE_EXAMEN" Type="Int32" />
+          <Property Name="ID_CITA" Type="Int32" />
+          <NavigationProperty Name="CITA" Relationship="Self.FK_CITA_TIPOEXAMEN_CITA" FromRole="CITA_TIPOEXAMEN" ToRole="CITA" />
+          <NavigationProperty Name="TIPOEXAMEN" Relationship="Self.FK_CITA_TIPOEXAMEN" FromRole="CITA_TIPOEXAMEN" ToRole="TIPOEXAMEN" />
+          <NavigationProperty Name="NOMBRE_EXAMEN" Relationship="Self.FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN" FromRole="CITA_TIPOEXAMEN" ToRole="NOMBRE_EXAMEN" />
+        </EntityType>
+        <EntityType Name="NOMBRE_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+          </Key>
+          <Property Name="ID_NOMBRE_EXAMEN" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPOEXAMEN" Type="Int32" />
+          <Property Name="NOMBRE_EXAMEN1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RANGO_INFERIOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RANGO_SUPERIOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CITA_TIPOEXAMEN" Relationship="Self.FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN" FromRole="NOMBRE_EXAMEN" ToRole="CITA_TIPOEXAMEN" />
+          <NavigationProperty Name="TIPOEXAMEN" Relationship="Self.FK_NOMBRE_EXAMEN_TIPOEXAMEN" FromRole="NOMBRE_EXAMEN" ToRole="TIPOEXAMEN" />
+          <NavigationProperty Name="RESULTADO_EXAMEN" Relationship="Self.FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN" FromRole="NOMBRE_EXAMEN" ToRole="RESULTADO_EXAMEN" />
+        </EntityType>
+        <EntityType Name="RESULTADO_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID_RESULTADOEXAMEN" />
+          </Key>
+          <Property Name="ID_RESULTADOEXAMEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_NOMBRE_EXAMEN" Type="Int32" />
+          <Property Name="RESULTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_TIPOEXAMEN" Type="Int32" />
+          <Property Name="ID_RESULTADOPACIENTE" Type="Int32" />
+          <NavigationProperty Name="NOMBRE_EXAMEN" Relationship="Self.FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN" FromRole="RESULTADO_EXAMEN" ToRole="NOMBRE_EXAMEN" />
+          <NavigationProperty Name="RESULTADO_PACIENTE" Relationship="Self.FK_RESULTADO_EXAMEN_ResultadoPaciente" FromRole="RESULTADO_EXAMEN" ToRole="RESULTADO_PACIENTE" />
+          <NavigationProperty Name="TIPOEXAMEN" Relationship="Self.FK_RESULTADO_EXAMEN_TIPOEXAMEN" FromRole="RESULTADO_EXAMEN" ToRole="TIPOEXAMEN" />
+        </EntityType>
+        <EntityType Name="RESULTADO_PACIENTE">
+          <Key>
+            <PropertyRef Name="ID_RESULTADOPACIENTE" />
+          </Key>
+          <Property Name="ID_RESULTADOPACIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBREPACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CEDULA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHANACIMIENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHAPROGRAMADA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHARESULTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_CITA" Type="Int32" />
+          <Property Name="ID_USUARIO" Type="Int32" />
+          <NavigationProperty Name="CITA" Relationship="Self.FK_RESULTADO_PACIENTE_CITA" FromRole="RESULTADO_PACIENTE" ToRole="CITA" />
+          <NavigationProperty Name="RESULTADO_EXAMEN" Relationship="Self.FK_RESULTADO_EXAMEN_ResultadoPaciente" FromRole="RESULTADO_PACIENTE" ToRole="RESULTADO_EXAMEN" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_RESULTADO_PACIENTE_RESULTADO_USUARIO" FromRole="RESULTADO_PACIENTE" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_ROL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIO_ROL" FromRole="ROL" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TIPOEXAMEN">
+          <Key>
+            <PropertyRef Name="ID_TIPOEXAMEN" />
+          </Key>
+          <Property Name="ID_TIPOEXAMEN" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_TIPOEXAMEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CITA_TIPOEXAMEN" Relationship="Self.FK_CITA_TIPOEXAMEN" FromRole="TIPOEXAMEN" ToRole="CITA_TIPOEXAMEN" />
+          <NavigationProperty Name="NOMBRE_EXAMEN" Relationship="Self.FK_NOMBRE_EXAMEN_TIPOEXAMEN" FromRole="TIPOEXAMEN" ToRole="NOMBRE_EXAMEN" />
+          <NavigationProperty Name="RESULTADO_EXAMEN" Relationship="Self.FK_RESULTADO_EXAMEN_TIPOEXAMEN" FromRole="TIPOEXAMEN" ToRole="RESULTADO_EXAMEN" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBREUSUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CEDULA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FECHANAMIENTO" Type="DateTime" Precision="0" />
+          <Property Name="ID_ROL" Type="Int32" />
+          <NavigationProperty Name="CITA" Relationship="Self.FK_CITA_USUARIO" FromRole="USUARIO" ToRole="CITA" />
+          <NavigationProperty Name="RESULTADO_PACIENTE" Relationship="Self.FK_RESULTADO_PACIENTE_RESULTADO_USUARIO" FromRole="USUARIO" ToRole="RESULTADO_PACIENTE" />
+          <NavigationProperty Name="ROL" Relationship="Self.FK_USUARIO_ROL" FromRole="USUARIO" ToRole="ROL" />
+        </EntityType>
+        <Association Name="FK_CITA_TIPOEXAMEN_CITA">
+          <End Role="CITA" Type="Self.CITA" Multiplicity="0..1" />
+          <End Role="CITA_TIPOEXAMEN" Type="Self.CITA_TIPOEXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITA">
+              <PropertyRef Name="ID_CITA" />
+            </Principal>
+            <Dependent Role="CITA_TIPOEXAMEN">
+              <PropertyRef Name="ID_CITA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITA_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_PACIENTE_CITA">
+          <End Role="CITA" Type="Self.CITA" Multiplicity="0..1" />
+          <End Role="RESULTADO_PACIENTE" Type="Self.RESULTADO_PACIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITA">
+              <PropertyRef Name="ID_CITA" />
+            </Principal>
+            <Dependent Role="RESULTADO_PACIENTE">
+              <PropertyRef Name="ID_CITA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITA_TIPOEXAMEN">
+          <End Role="TIPOEXAMEN" Type="Self.TIPOEXAMEN" Multiplicity="0..1" />
+          <End Role="CITA_TIPOEXAMEN" Type="Self.CITA_TIPOEXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Principal>
+            <Dependent Role="CITA_TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN">
+          <End Role="NOMBRE_EXAMEN" Type="Self.NOMBRE_EXAMEN" Multiplicity="0..1" />
+          <End Role="CITA_TIPOEXAMEN" Type="Self.CITA_TIPOEXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOMBRE_EXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Principal>
+            <Dependent Role="CITA_TIPOEXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOMBRE_EXAMEN_TIPOEXAMEN">
+          <End Role="TIPOEXAMEN" Type="Self.TIPOEXAMEN" Multiplicity="0..1" />
+          <End Role="NOMBRE_EXAMEN" Type="Self.NOMBRE_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Principal>
+            <Dependent Role="NOMBRE_EXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN">
+          <End Role="NOMBRE_EXAMEN" Type="Self.NOMBRE_EXAMEN" Multiplicity="0..1" />
+          <End Role="RESULTADO_EXAMEN" Type="Self.RESULTADO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOMBRE_EXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Principal>
+            <Dependent Role="RESULTADO_EXAMEN">
+              <PropertyRef Name="ID_NOMBRE_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_EXAMEN_ResultadoPaciente">
+          <End Role="RESULTADO_PACIENTE" Type="Self.RESULTADO_PACIENTE" Multiplicity="0..1" />
+          <End Role="RESULTADO_EXAMEN" Type="Self.RESULTADO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESULTADO_PACIENTE">
+              <PropertyRef Name="ID_RESULTADOPACIENTE" />
+            </Principal>
+            <Dependent Role="RESULTADO_EXAMEN">
+              <PropertyRef Name="ID_RESULTADOPACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_EXAMEN_TIPOEXAMEN">
+          <End Role="TIPOEXAMEN" Type="Self.TIPOEXAMEN" Multiplicity="0..1" />
+          <End Role="RESULTADO_EXAMEN" Type="Self.RESULTADO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOEXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Principal>
+            <Dependent Role="RESULTADO_EXAMEN">
+              <PropertyRef Name="ID_TIPOEXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESULTADO_PACIENTE_RESULTADO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="RESULTADO_PACIENTE" Type="Self.RESULTADO_PACIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="RESULTADO_PACIENTE">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_ROL">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="laboratorioDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CITA" EntityType="Self.CITA" />
+          <EntitySet Name="CITA_TIPOEXAMEN" EntityType="Self.CITA_TIPOEXAMEN" />
+          <EntitySet Name="NOMBRE_EXAMEN" EntityType="Self.NOMBRE_EXAMEN" />
+          <EntitySet Name="RESULTADO_EXAMEN" EntityType="Self.RESULTADO_EXAMEN" />
+          <EntitySet Name="RESULTADO_PACIENTE" EntityType="Self.RESULTADO_PACIENTE" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TIPOEXAMEN" EntityType="Self.TIPOEXAMEN" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK_CITA_TIPOEXAMEN_CITA" Association="Self.FK_CITA_TIPOEXAMEN_CITA">
+            <End Role="CITA" EntitySet="CITA" />
+            <End Role="CITA_TIPOEXAMEN" EntitySet="CITA_TIPOEXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITA_USUARIO" Association="Self.FK_CITA_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_PACIENTE_CITA" Association="Self.FK_RESULTADO_PACIENTE_CITA">
+            <End Role="CITA" EntitySet="CITA" />
+            <End Role="RESULTADO_PACIENTE" EntitySet="RESULTADO_PACIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITA_TIPOEXAMEN" Association="Self.FK_CITA_TIPOEXAMEN">
+            <End Role="TIPOEXAMEN" EntitySet="TIPOEXAMEN" />
+            <End Role="CITA_TIPOEXAMEN" EntitySet="CITA_TIPOEXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN" Association="Self.FK_CITA_TIPOEXAMEN_NOMBRE_EXAMEN">
+            <End Role="NOMBRE_EXAMEN" EntitySet="NOMBRE_EXAMEN" />
+            <End Role="CITA_TIPOEXAMEN" EntitySet="CITA_TIPOEXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOMBRE_EXAMEN_TIPOEXAMEN" Association="Self.FK_NOMBRE_EXAMEN_TIPOEXAMEN">
+            <End Role="TIPOEXAMEN" EntitySet="TIPOEXAMEN" />
+            <End Role="NOMBRE_EXAMEN" EntitySet="NOMBRE_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN" Association="Self.FK_RESULTADO_EXAMEN_RESULTADO_EXAMEN">
+            <End Role="NOMBRE_EXAMEN" EntitySet="NOMBRE_EXAMEN" />
+            <End Role="RESULTADO_EXAMEN" EntitySet="RESULTADO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_EXAMEN_ResultadoPaciente" Association="Self.FK_RESULTADO_EXAMEN_ResultadoPaciente">
+            <End Role="RESULTADO_PACIENTE" EntitySet="RESULTADO_PACIENTE" />
+            <End Role="RESULTADO_EXAMEN" EntitySet="RESULTADO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_EXAMEN_TIPOEXAMEN" Association="Self.FK_RESULTADO_EXAMEN_TIPOEXAMEN">
+            <End Role="TIPOEXAMEN" EntitySet="TIPOEXAMEN" />
+            <End Role="RESULTADO_EXAMEN" EntitySet="RESULTADO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESULTADO_PACIENTE_RESULTADO_USUARIO" Association="Self.FK_RESULTADO_PACIENTE_RESULTADO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="RESULTADO_PACIENTE" EntitySet="RESULTADO_PACIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="laboratorioDBModelStoreContainer" CdmEntityContainer="laboratorioDBEntities1">
+          <EntitySetMapping Name="CITA">
+            <EntityTypeMapping TypeName="laboratorioDBModel.CITA">
+              <MappingFragment StoreEntitySet="CITA">
+                <ScalarProperty Name="ID_CITA" ColumnName="ID_CITA" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBREPACIENTE" ColumnName="NOMBREPACIENTE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="FECHAPROGRAMADA" ColumnName="FECHAPROGRAMADA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CITA_TIPOEXAMEN">
+            <EntityTypeMapping TypeName="laboratorioDBModel.CITA_TIPOEXAMEN">
+              <MappingFragment StoreEntitySet="CITA_TIPOEXAMEN">
+                <ScalarProperty Name="ID_CITA_EXAMEN" ColumnName="ID_CITA_EXAMEN" />
+                <ScalarProperty Name="ID_TIPOEXAMEN" ColumnName="ID_TIPOEXAMEN" />
+                <ScalarProperty Name="ID_NOMBRE_EXAMEN" ColumnName="ID_NOMBRE_EXAMEN" />
+                <ScalarProperty Name="ID_CITA" ColumnName="ID_CITA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOMBRE_EXAMEN">
+            <EntityTypeMapping TypeName="laboratorioDBModel.NOMBRE_EXAMEN">
+              <MappingFragment StoreEntitySet="NOMBRE_EXAMEN">
+                <ScalarProperty Name="ID_NOMBRE_EXAMEN" ColumnName="ID_NOMBRE_EXAMEN" />
+                <ScalarProperty Name="ID_TIPOEXAMEN" ColumnName="ID_TIPOEXAMEN" />
+                <ScalarProperty Name="NOMBRE_EXAMEN1" ColumnName="NOMBRE_EXAMEN" />
+                <ScalarProperty Name="RANGO_INFERIOR" ColumnName="RANGO_INFERIOR" />
+                <ScalarProperty Name="RANGO_SUPERIOR" ColumnName="RANGO_SUPERIOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESULTADO_EXAMEN">
+            <EntityTypeMapping TypeName="laboratorioDBModel.RESULTADO_EXAMEN">
+              <MappingFragment StoreEntitySet="RESULTADO_EXAMEN">
+                <ScalarProperty Name="ID_RESULTADOEXAMEN" ColumnName="ID_RESULTADOEXAMEN" />
+                <ScalarProperty Name="ID_NOMBRE_EXAMEN" ColumnName="ID_NOMBRE_EXAMEN" />
+                <ScalarProperty Name="RESULTADO" ColumnName="RESULTADO" />
+                <ScalarProperty Name="ID_TIPOEXAMEN" ColumnName="ID_TIPOEXAMEN" />
+                <ScalarProperty Name="ID_RESULTADOPACIENTE" ColumnName="ID_RESULTADOPACIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESULTADO_PACIENTE">
+            <EntityTypeMapping TypeName="laboratorioDBModel.RESULTADO_PACIENTE">
+              <MappingFragment StoreEntitySet="RESULTADO_PACIENTE">
+                <ScalarProperty Name="ID_RESULTADOPACIENTE" ColumnName="ID_RESULTADOPACIENTE" />
+                <ScalarProperty Name="NOMBREPACIENTE" ColumnName="NOMBREPACIENTE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+                <ScalarProperty Name="FECHAPROGRAMADA" ColumnName="FECHAPROGRAMADA" />
+                <ScalarProperty Name="FECHARESULTADO" ColumnName="FECHARESULTADO" />
+                <ScalarProperty Name="ID_CITA" ColumnName="ID_CITA" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="laboratorioDBModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="NOMBRE_ROL" ColumnName="NOMBRE_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="laboratorioDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOEXAMEN">
+            <EntityTypeMapping TypeName="laboratorioDBModel.TIPOEXAMEN">
+              <MappingFragment StoreEntitySet="TIPOEXAMEN">
+                <ScalarProperty Name="ID_TIPOEXAMEN" ColumnName="ID_TIPOEXAMEN" />
+                <ScalarProperty Name="NOMBRE_TIPOEXAMEN" ColumnName="NOMBRE_TIPOEXAMEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="laboratorioDBModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBREUSUARIO" ColumnName="NOMBREUSUARIO" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHANAMIENTO" ColumnName="FECHANAMIENTO" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
