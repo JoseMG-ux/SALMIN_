@@ -10,6 +10,7 @@ namespace PTeleInf_.Controllers
 {
     public class laboratorioDBController : Controller
     {
+        //CREACION DEL REPO
         // GET: laboratorioDB
 
 
